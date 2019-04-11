@@ -7,7 +7,7 @@ export default class EventEmitter{
         Logger.info(vuex.mutationPrefix ? `Vuex socket mutations enabled` : `Vuex socket mutations disabled`);
         Logger.info(vuex ? `Vuex socket actions enabled` : `Vuex socket actions disabled`);
         this.store = vuex.store;
-        this.actionPrefix = vuex.actionPrefix ? vuex.actionPrefix : 'SOCKET_';
+        this.actionPrefix = typeof vuex.actionPrefix !== 'undefined' ? vuex.actionPrefix : 'SOCKET_';
         this.mutationPrefix = vuex.mutationPrefix;
         this.listeners = new Map();
     }
@@ -109,7 +109,7 @@ export default class EventEmitter{
 
             }
 
-            if(this.mutationPrefix) {
+            if(typeof this.mutationPrefix !== 'undefined') {
 
                 let prefixed_event = this.mutationPrefix + event;
 
@@ -119,7 +119,7 @@ export default class EventEmitter{
 
                     if(mutation === prefixed_event) {
 
-                        Logger.info(`Commiting Mutation: ${key}, Data:`, args);
+                        Logger.info(`Committing Mutation: ${key}, Data:`, args);
 
                         this.store.commit(key, args);
 
