@@ -4,7 +4,7 @@ export default class EventEmitter{
 
     constructor(vuex = {}){
         Logger.info(vuex ? `Vuex adapter enabled` : `Vuex adapter disabled`);
-        Logger.info(vuex.mutationPrefix ? `Vuex socket mutations enabled` : `Vuex socket mutations disabled`);
+        Logger.info(typeof this.mutationPrefix !== 'undefined' ? `Vuex socket mutations enabled` : `Vuex socket mutations disabled`);
         Logger.info(vuex ? `Vuex socket actions enabled` : `Vuex socket actions disabled`);
         this.store = vuex.store;
         this.actionPrefix = typeof vuex.actionPrefix !== 'undefined' ? vuex.actionPrefix : 'SOCKET_';
